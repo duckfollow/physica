@@ -1,7 +1,15 @@
 "use client";
+import { WebSwingLab } from "./web-swing-lab";
 import { useState } from "react";
 import { useClock, Slider, Playback, Frame, Arrow } from "./lab-primitives";
 import { CoasterLab, BuoyancyLab, OrbitLab } from "./discovery-labs";
+import { OsmosisLab, AcidBaseLab } from "./life-labs";
+import {
+  InclineLab, CollisionLab, LensLab, MotorLab, HalfLifeLab, EnzymeLab, PhotosynthesisLab,
+  MendelLab, PredatorPreyLab, ReactionRateLab, EquilibriumLab, IdealGasLab, TitrationLab,
+  BrakingLab, LiftLab, TorqueLab,
+} from "./extra-labs";
+import { LinearLab, QuadraticLab, TrigonometryLab, ProbabilityLab, AreaLab } from "./math-labs";
 import { forceMotion, pendulumPeriod, waveDisplacement, refractedAngle, resistorCircuit, mixedTemperature, boxEnergyEV, boxDensity, boxProbability } from "@/simulations/models";
 import type { SimulationId } from "@/content/simulations";
 function ForceLab(){
@@ -41,4 +49,4 @@ function QuantumLab(){
  const [n,setN]=useState(1),[length,setLength]=useState(1),[end,setEnd]=useState(50);const path=Array.from({length:301},(_,i)=>`${60+i*2},${315-boxDensity(i/300,n)*110}`).join(" ");const shade=["60,315",...Array.from({length:151},(_,i)=>{const x=end/100*i/150;return `${60+x*600},${315-boxDensity(x,n)*110}`;}),`${60+end*6},315`].join(" ");
  return <Frame title="บ่อศักย์อนันต์: ความหนาแน่นความน่าจะเป็น" stats={[["พลังงานสถานะ",`${boxEnergyEV(n,length).toFixed(3)} eV`],["โอกาสในพื้นที่สีส้ม",`${(boxProbability(0,end/100,n)*100).toFixed(1)} %`],["จุดศูนย์ภายใน",`${n-1} จุด`]]} controls={<><Slider label="เลขควอนตัม n" value={n} min={1} max={5} onChange={setN}/><Slider label="ความกว้างกล่อง L" value={length} min={0.5} max={3} step={0.1} unit="nm" onChange={setLength}/><Slider label="ช่วงที่ตรวจจากซ้าย" value={end} min={0} max={100} unit="% ของ L" onChange={setEnd}/><p className="hint">พื้นที่ใต้กราฟในช่วงสีส้มคือโอกาสพบอนุภาค ไม่ใช่เส้นทางการเคลื่อนที่</p></>} note="สถานะพลังงานแน่นอนมีความหนาแน่นไม่เปลี่ยนตามเวลา · ภาพขยายกล่องให้กว้างเท่ากันเพื่อเปรียบเทียบรูปทรง"><rect x="40" y="65" width="20" height="250" fill="#697e6e"/><rect x="660" y="65" width="20" height="250" fill="#697e6e"/><polygon points={shade} fill="#efd2b9"/><line x1="60" y1="315" x2="660" y2="315" stroke="#69856b"/><polyline points={path} fill="none" stroke="#315e48" strokeWidth="3"/><text x="70" y="40">L|ψ|²</text><text x="60" y="347" textAnchor="middle">0</text><text x="360" y="347" textAnchor="middle">0.5</text><text x="660" y="347" textAnchor="middle">1</text><text x="360" y="380" textAnchor="middle">ตำแหน่งสัมพัทธ์ x/L · L = {length.toFixed(1)} nm</text><text x="12" y="100">2</text><text x="12" y="320">0</text></Frame>;
 }
-export function VisualLab({id}:{id:Exclude<SimulationId,"projectile">}){const components={coaster:CoasterLab,buoyancy:BuoyancyLab,orbit:OrbitLab,force:ForceLab,pendulum:PendulumLab,wave:WaveLab,refraction:RefractionLab,circuit:CircuitLab,heat:HeatLab,quantum:QuantumLab};const Component=components[id];return <Component/>;}
+export function VisualLab({id}:{id:Exclude<SimulationId,"projectile">}){const components={"web-swing":WebSwingLab,coaster:CoasterLab,buoyancy:BuoyancyLab,orbit:OrbitLab,force:ForceLab,pendulum:PendulumLab,wave:WaveLab,refraction:RefractionLab,circuit:CircuitLab,heat:HeatLab,quantum:QuantumLab,osmosis:OsmosisLab,"acid-base":AcidBaseLab,incline:InclineLab,collision:CollisionLab,lens:LensLab,motor:MotorLab,"half-life":HalfLifeLab,enzyme:EnzymeLab,photosynthesis:PhotosynthesisLab,mendel:MendelLab,"predator-prey":PredatorPreyLab,"reaction-rate":ReactionRateLab,equilibrium:EquilibriumLab,"ideal-gas":IdealGasLab,titration:TitrationLab,braking:BrakingLab,lift:LiftLab,torque:TorqueLab,linear:LinearLab,quadratic:QuadraticLab,trigonometry:TrigonometryLab,probability:ProbabilityLab,area:AreaLab};const Component=components[id];return <Component/>;}

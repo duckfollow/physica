@@ -3,7 +3,7 @@ import { useEffect, useId, useState, type ReactNode } from "react";
 export function useClock(limit=Infinity){
  const [time,setTime]=useState(0),[playing,setPlaying]=useState(false);const running=playing&&time<limit;
  useEffect(()=>{if(!running)return;let frame:number;let last:number|undefined;function tick(now:number){const dt=last===undefined?0:Math.min((now-last)/1000,0.05);last=now;setTime(t=>Math.min(limit,t+dt));frame=requestAnimationFrame(tick);}frame=requestAnimationFrame(tick);return()=>cancelAnimationFrame(frame);},[running,limit]);
- return {time,running,toggle:()=>{if(time>=limit)setTime(0);setPlaying(!running);},reset:()=>{setTime(0);setPlaying(false);}};
+ return {time,running,playing,play:()=>setPlaying(true),toggle:()=>{if(time>=limit)setTime(0);setPlaying(!running);},reset:()=>{setTime(0);setPlaying(false);}};
 }
 export function Slider({label,value,min,max,step=1,unit="",onChange}:{label:string;value:number;min:number;max:number;step?:number;unit?:string;onChange:(v:number)=>void}){const id=useId();return <div className="sim-slider"><label htmlFor={id}>{label}<output>{value} {unit}</output></label><input id={id} type="range" min={min} max={max} step={step} value={value} onChange={e=>onChange(Number(e.target.value))}/></div>;}
 export function Playback({clock}:{clock:ReturnType<typeof useClock>}){return <div className="playback"><button className="button" onClick={clock.toggle}>{clock.running?"หยุดชั่วคราว Ⅱ":"เริ่มจำลอง ▶"}</button><button className="mode-button" onClick={clock.reset}>เริ่มเวลาใหม่ ↺</button></div>;}
