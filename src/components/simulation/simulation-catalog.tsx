@@ -1,0 +1,10 @@
+"use client";
+import Link from "next/link";
+import { useState } from "react";
+import { levels, type LevelId } from "@/content/curriculum";
+import { simulations, simulationHref } from "@/content/simulations";
+export function SimulationCatalog({ initialLevel="all" }: { initialLevel?: LevelId | "all" }) {
+ const [level,setLevel]=useState<string>(initialLevel),[topic,setTopic]=useState("all"),[query,setQuery]=useState("");
+ const visible=simulations.filter(s=>(level==="all"||s.levels.includes(level as LevelId))&&(topic==="all"||s.topic===topic)&&`${s.title} ${s.topic} ${s.question}`.includes(query.trim()));
+ return <div className="sim-catalog"><div className="catalog-tools"><label className="search-field">อยากทดลองเรื่องอะไร?<input type="search" value={query} placeholder="เช่น แสง คลื่น หรือวงจร" onChange={e=>setQuery(e.target.value)}/></label><label>ระดับผู้เรียน<select value={level} onChange={e=>setLevel(e.target.value)}><option value="all">ทุกระดับ</option>{levels.map(l=><option key={l.id} value={l.id}>{l.range}</option>)}</select></label><label>หัวข้อ<select value={topic} onChange={e=>setTopic(e.target.value)}><option value="all">ทุกหัวข้อ</option>{[...new Set(simulations.map(s=>s.topic))].map(t=><option key={t}>{t}</option>)}</select></label></div><p className="muted" role="status">{visible.length} การจำลองพร้อมทดลอง · ระดับเป็นคำแนะนำ เลือกตามพื้นฐานผู้เรียนได้</p><div className="sim-grid">{visible.map(s=><Link href={simulationHref(s.id)} key={s.id} className="sim-card"><div className={`sim-art art-${s.id}`} aria-hidden="true"><span>{s.icon}</span><i/><i/></div><div className="sim-card-body"><p className="eyebrow">{s.topic}</p><h2>{s.title}</h2><p>{s.question}</p><div className="sim-levels">{s.levels.map(id=><span key={id}>{levels.find(l=>l.id===id)?.range}</span>)}</div><strong>เปิดการจำลอง ↗</strong></div></Link>)}</div>{visible.length===0&&<div className="panel"><h2>ไม่พบการจำลองที่ตรงกัน</h2><button className="button" onClick={()=>{setQuery("");setLevel("all");setTopic("all");}}>แสดงทั้งหมด</button></div>}</div>;
+}

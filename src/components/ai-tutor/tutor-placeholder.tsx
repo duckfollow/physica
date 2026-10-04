@@ -1,0 +1,1 @@
+export function TutorPlaceholder() { return <div className="panel"><span className="badge">กำลังวางแผน</span><h2>เพื่อนช่วยคิด ไม่ใช่แค่บอกคำตอบ</h2><p>ในอนาคต คุณจะถามคำถามและรับคำใบ้ที่เหมาะกับระดับการเรียนได้จากตรงนี้</p><p className="muted">ยังไม่เปิดให้สนทนา ระหว่างนี้ลองสำรวจภาพจำลองในห้องทดลองได้เลย</p></div>; }
