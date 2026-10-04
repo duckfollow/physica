@@ -62,15 +62,11 @@ export function YoungLab() {
   const fringe = youngFringes(wavelength, slitSep, screenDist);
   const halfWidth = 0.008;
   const samples = 120;
-  const bars = useMemo(
-    () =>
-      Array.from({ length: samples }, (_, i) => {
-        const x = -halfWidth + (2 * halfWidth * i) / (samples - 1);
-        const I = youngIntensity(x, wavelength, slitSep, screenDist);
-        return { x, I };
-      }),
-    [wavelength, slitSep, screenDist],
-  );
+  const bars = Array.from({ length: samples }, (_, i) => {
+    const x = -halfWidth + (2 * halfWidth * i) / (samples - 1);
+    const I = youngIntensity(x, wavelength, slitSep, screenDist);
+    return { x, I };
+  });
   const hue = Math.max(0, Math.min(300, (650 - wavelength) * 0.9));
   return (
     <Frame

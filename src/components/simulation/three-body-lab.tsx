@@ -21,7 +21,7 @@ export function ThreeBodyLab() {
   const scale = preset === "hierarchical" ? 72 : 110;
   const cx = 360, cy = 200;
 
-  const trails = result.trails.map((trail, i) =>
+  const trails = result.trails.map((trail) =>
     trail
       .slice(0, index + 1)
       .filter((_, k) => k % 3 === 0 || k === index)
