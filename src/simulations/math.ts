@@ -68,6 +68,62 @@ export function dieProbability(faces: number, target: number) {
   return { faces: f, target: t, p, complementary: 1 - p };
 }
 
+/** Exponential y = a · bˣ */
+export function exponentialValue(a: number, base: number, x: number) {
+  const b = Math.max(0.05, base);
+  return a * b ** x;
+}
+
+export function exponentialGrowth(base: number) {
+  if (base > 1 + 1e-12) return "growth" as const;
+  if (base < 1 - 1e-12 && base > 0) return "decay" as const;
+  return "flat" as const;
+}
+
+/** Absolute value V-graph y = a|x − h| + k */
+export function absoluteValue(a: number, h: number, k: number, x: number) {
+  return a * Math.abs(x - h) + k;
+}
+
+export function absoluteVertex(h: number, k: number) {
+  return { x: h, y: k };
+}
+
+/** Reciprocal / rational y = a/(x − h) + k with vertical asymptote x = h */
+export function reciprocalValue(a: number, h: number, k: number, x: number) {
+  const d = x - h;
+  if (Math.abs(d) < 1e-9) return Number.NaN;
+  return a / d + k;
+}
+
+export function reciprocalAsymptotes(h: number, k: number) {
+  return { vertical: h, horizontal: k };
+}
+
+/** Sample a function into one or more polyline segments, skipping non-finite / clipped y. */
+export function sampleGraph(
+  fn: (x: number) => number,
+  xMin = -10,
+  xMax = 10,
+  steps = 120,
+  yClip = 14,
+) {
+  const segments: { x: number; y: number }[][] = [];
+  let current: { x: number; y: number }[] = [];
+  for (let i = 0; i <= steps; i++) {
+    const x = xMin + (i / steps) * (xMax - xMin);
+    const y = fn(x);
+    if (!Number.isFinite(y) || Math.abs(y) > yClip) {
+      if (current.length > 1) segments.push(current);
+      current = [];
+      continue;
+    }
+    current.push({ x, y });
+  }
+  if (current.length > 1) segments.push(current);
+  return segments;
+}
+
 /** Trapezoidal area under y=f(x) on [left,right]. */
 export function areaUnderQuadratic(a: number, b: number, c: number, left: number, right: number, slices = 40) {
   const lo = Math.min(left, right), hi = Math.max(left, right);

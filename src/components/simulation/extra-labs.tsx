@@ -4,7 +4,7 @@ import { Frame, Slider, Playback, useClock, Arrow } from "./lab-primitives";
 import {
   inclineMotion, collide, thinLens, motorSpeed, decayRemaining, enzymeRate, photosynthesisRate,
   mendelCross, predatorPreyPath, reactionRate, equilibriumAB, idealGas, titrationPH,
-  brakingDistance, wingLift, torque,
+  brakingDistance, wingLift, torque, hydrostaticPressure,
 } from "@/simulations/extras";
 import { indicatorHue } from "@/simulations/life-science";
 
@@ -190,6 +190,33 @@ export function EquilibriumLab() {
     <text x="200" y="320" textAnchor="middle">A</text>
     <text x="500" y="320" textAnchor="middle">B</text>
     <text x="360" y="200" textAnchor="middle" className="big-symbol">⇌</text>
+  </Frame>;
+}
+
+export function PressureLab() {
+  const [depth, setDepth] = useState(5), [density, setDensity] = useState(1000), [areaCm2, setAreaCm2] = useState(100);
+  const area = areaCm2 / 10_000;
+  const p = hydrostaticPressure(depth, density, area);
+  const surfaceY = 70, tankH = 260, tankBottom = surfaceY + tankH;
+  const probeY = surfaceY + (depth / 20) * tankH;
+  const plateW = 20 + Math.sqrt(areaCm2) * 2.2;
+  const fluidTint = density >= 1025 ? "#6a9e9a" : density >= 1000 ? "#7eb0ad" : "#c4b48a";
+  return <Frame title="ความดันของเหลวตามความลึก" stats={[["ความดันเกจ", `${p.gaugeKPa.toFixed(1)} kPa`], ["ความดันสัมบูรณ์", `${p.absoluteAtm.toFixed(2)} atm`], ["แรงบนแผ่น", `${p.force.toFixed(0)} N`]]} controls={<><Slider label="ความลึกของแผ่น" min={0} max={20} step={0.5} value={depth} unit="m" onChange={setDepth} /><label htmlFor="pressure-fluid">ชนิดของเหลว</label><select id="pressure-fluid" value={density} onChange={(e) => setDensity(Number(e.target.value))}><option value={800}>น้ำมัน · 800 kg/m³</option><option value={1000}>น้ำจืด · 1000 kg/m³</option><option value={1025}>น้ำทะเล · 1025 kg/m³</option></select><Slider label="พื้นที่แผ่น" min={20} max={400} step={10} value={areaCm2} unit="cm²" onChange={setAreaCm2} /><p className="hint">ความดันเกจขึ้นกับความลึกและความหนาแน่น ไม่ขึ้นกับพื้นที่ · แต่แรงบนแผ่นโตกับพื้นที่</p></>} note="ภาชนะเปิดสู่บรรยากาศ · P₀ = 101.325 kPa · g = 9.81 m/s² · แผ่นแบนแนวนอน">
+    <Stage fill="#eef4f2" />
+    <rect x="180" y={surfaceY} width="280" height={tankH} fill={fluidTint} opacity="0.55" />
+    <rect x="180" y={surfaceY} width="280" height={tankH} fill="none" stroke="#345e48" strokeWidth="4" />
+    <line x1="180" y1={surfaceY} x2="460" y2={surfaceY} stroke="#619789" strokeWidth="3" />
+    <line x1="120" y1={surfaceY} x2="120" y2={tankBottom} stroke="#9aac9b" strokeWidth="2" />
+    {[0, 5, 10, 15, 20].map((d) => {
+      const y = surfaceY + (d / 20) * tankH;
+      return <g key={d}><line x1="112" y1={y} x2="128" y2={y} stroke="#9aac9b" /><text x="100" y={y + 4} textAnchor="end">{d}</text></g>;
+    })}
+    <text x="100" y="55" textAnchor="end">m</text>
+    <rect x={320 - plateW / 2} y={probeY - 6} width={plateW} height="12" rx="3" fill="#d87951" stroke="#8a4e2d" strokeWidth="2" />
+    <Arrow x1={320} y1={probeY - 28} x2={320} y2={probeY - 8} color="#ce663b" />
+    <text x="480" y={probeY + 4}>h = {depth.toFixed(1)} m</text>
+    <text x="40" y="48">P = ρgh = {(density * 9.81 * depth / 1000).toFixed(1)} kPa (เกจ)</text>
+    <text x="40" y="360">ยิ่งลึกหรือยิ่งหนาแน่น → ความดันเกจยิ่งสูง</text>
   </Frame>;
 }
 

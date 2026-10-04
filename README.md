@@ -2,7 +2,9 @@
 
 สื่อจำลองภาษาไทยสำหรับฟิสิกส์ ชีววิทยา เคมี และคณิตศาสตร์ เน้นการปรับตัวแปรแล้วเห็นผล พร้อมทฤษฎีสั้น ๆ และนักวิทยาศาสตร์ที่เกี่ยวข้อง
 
-มี 35 การจำลอง ครอบคลุมฟิสิกส์ ชีววิทยา เคมี และคณิตศาสตร์ เช่น กราฟเส้นตรง พาราโบลา ตรีโกณ ความน่าจะเป็น พื้นที่ใต้กราฟ โหนใย ออสโมซิส กรด–เบส และอื่น ๆ รายการเต็มอยู่ที่ docs/content.md
+เว็บไซต์: https://duckfollow.github.io/physica
+
+มี 59 การจำลอง ครอบคลุมฟิสิกส์ ชีววิทยา เคมี และคณิตศาสตร์ เช่น พันธะเคมี ลิวอิส แม่เหล็ก และอื่น ๆ รายการเต็มอยู่ที่ docs/content.md
 
 สรุปรายเรื่อง หมวด และระดับผู้เรียนอยู่ที่ [docs/content.md](docs/content.md)
 
@@ -34,9 +36,13 @@
 
 ## GitHub Pages
 
-ใช้ static export ไป `out/` และ Webpack เปิด Settings → Pages → GitHub Actions แล้ว push main หรือสั่ง workflow `Deploy Physica to GitHub Pages` ยังไม่ได้ push/deploy จากการปรับโค้ดครั้งนี้
+เว็บที่ deploy แล้ว: https://duckfollow.github.io/physica
 
-Build project site ด้วย `NEXT_PUBLIC_BASE_PATH=/physica npm run build` ต้อง serve `out/` ใต้ `/physica/` ส่วน build ไม่ตั้ง env ใช้ root path ไม่มี `next start`
+ใช้ static export ไป `out/` และ Webpack เปิด Settings → Pages → GitHub Actions แล้ว push main หรือสั่ง workflow `Deploy Physica to GitHub Pages`
+
+Build project site ด้วย `NEXT_PUBLIC_BASE_PATH=/physica NEXT_PUBLIC_SITE_URL=https://duckfollow.github.io npm run build` ต้อง serve `out/` ใต้ `/physica/` ส่วน build ไม่ตั้ง env ใช้ root path ไม่มี `next start`
+
+ตอนแชร์ลิงก์ ใช้ Open Graph / Twitter card จาก metadata และรูป `opengraph-image` ที่สร้างตอน build ตั้ง `NEXT_PUBLIC_SITE_URL` ให้เป็น origin จริงเพื่อให้ `og:image` เป็น URL เต็ม
 
 AI tutor ต้องเรียก backend ภายนอก ห้ามใส่ API key ใน browser หรือ NEXT_PUBLIC_* เพราะ GitHub Pages ไม่มี server runtime
 

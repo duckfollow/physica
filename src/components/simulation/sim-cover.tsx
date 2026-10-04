@@ -24,6 +24,8 @@ function Motif({ id }: { id: SimulationId }) {
       return <><line x1="160" y1="28" x2="118" y2="108" stroke="currentColor" strokeWidth="4" /><circle cx="118" cy="108" r="14" fill="currentColor" /></>;
     case "orbit":
       return <><ellipse cx="160" cy="76" rx="88" ry="36" fill="none" stroke="currentColor" strokeWidth="3" transform="rotate(-18 160 76)" /><circle cx="160" cy="76" r="16" fill="currentColor" /><circle cx="236" cy="54" r="7" fill="currentColor" /></>;
+    case "three-body":
+      return <><path d="M70 90 C110 30, 150 30, 160 76 S210 122, 250 50" fill="none" stroke="currentColor" strokeWidth="3" /><circle cx="92" cy="72" r="8" fill="currentColor" /><circle cx="160" cy="76" r="8" fill="currentColor" /><circle cx="228" cy="68" r="8" fill="currentColor" /></>;
     case "projectile":
       return <path d="M36 118 Q160 18 284 118" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />;
     case "force":
@@ -32,6 +34,16 @@ function Motif({ id }: { id: SimulationId }) {
       return <path d="M28 48 C80 48, 100 120, 160 120 S240 48, 300 48" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />;
     case "buoyancy":
       return <><rect x="100" y="70" width="120" height="54" rx="10" fill="currentColor" opacity="0.22" /><path d="M40 96 H280" stroke="currentColor" strokeWidth="4" /><rect x="118" y="58" width="84" height="48" rx="8" fill="currentColor" opacity="0.55" /></>;
+    case "pressure":
+      return <><rect x="110" y="36" width="100" height="96" rx="8" fill="currentColor" opacity="0.18" stroke="currentColor" strokeWidth="3" /><rect x="128" y="88" width="64" height="10" rx="3" fill="currentColor" /><path d="M160 58 V82" stroke="currentColor" strokeWidth="4" strokeLinecap="round" /><path d="M150 72 L160 84 L170 72" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></>;
+    case "barometer":
+      return <><rect x="130" y="100" width="60" height="28" rx="6" fill="currentColor" opacity="0.25" /><path d="M148 100 V36 H172 V100" fill="none" stroke="currentColor" strokeWidth="5" /><rect x="152" y="58" width="16" height="42" fill="currentColor" opacity="0.55" /></>;
+    case "double-slit":
+      return <><rect x="70" y="36" width="14" height="28" fill="currentColor" opacity="0.45" /><rect x="70" y="72" width="14" height="12" fill="currentColor" opacity="0.45" /><rect x="70" y="92" width="14" height="28" fill="currentColor" opacity="0.45" /><rect x="230" y="36" width="20" height="90" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="3" /><path d="M84 68 H230 M84 88 H230" stroke="currentColor" strokeWidth="3" opacity="0.6" /></>;
+    case "spectrum":
+      return <><polygon points="90,40 140,120 90,120" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="3" /><path d="M50 80 H90" stroke="currentColor" strokeWidth="4" /><path d="M140 90 L260 50" stroke="currentColor" strokeWidth="3" opacity="0.45" /><path d="M140 100 L260 90" stroke="currentColor" strokeWidth="3" opacity="0.65" /><path d="M140 110 L260 130" stroke="currentColor" strokeWidth="3" opacity="0.85" /></>;
+    case "rutherford":
+      return <><circle cx="160" cy="76" r="12" fill="currentColor" /><path d="M50 50 Q120 70 150 76 T280 40" fill="none" stroke="currentColor" strokeWidth="4" /><path d="M50 110 Q130 90 155 80" fill="none" stroke="currentColor" strokeWidth="3" opacity="0.5" /></>;
     case "refraction":
       return <><line x1="70" y1="30" x2="160" y2="76" stroke="currentColor" strokeWidth="4" /><line x1="160" y1="76" x2="250" y2="130" stroke="currentColor" strokeWidth="4" /><line x1="40" y1="76" x2="280" y2="76" stroke="currentColor" strokeWidth="2" opacity="0.45" /></>;
     case "lens":
@@ -70,6 +82,8 @@ function Motif({ id }: { id: SimulationId }) {
       return <><path d="M50 100 C90 40, 130 40, 160 76 S230 112, 270 50" fill="none" stroke="currentColor" strokeWidth="4" /><path d="M50 110 C100 120, 150 30, 200 70 S260 110, 290 60" fill="none" stroke="currentColor" strokeWidth="4" opacity="0.55" /></>;
     case "acid-base":
       return <><path d="M130 36 H190 L210 120 H110 Z" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="3" /><path d="M120 88 H200" stroke="currentColor" strokeWidth="3" opacity="0.5" /></>;
+    case "elements":
+      return <><rect x="70" y="40" width="40" height="40" rx="6" fill="currentColor" opacity="0.25" /><rect x="120" y="40" width="40" height="40" rx="6" fill="currentColor" opacity="0.4" /><rect x="170" y="40" width="40" height="40" rx="6" fill="currentColor" opacity="0.55" /><rect x="220" y="40" width="40" height="40" rx="6" fill="currentColor" opacity="0.7" /><rect x="70" y="90" width="40" height="40" rx="6" fill="currentColor" opacity="0.35" /><rect x="120" y="90" width="40" height="40" rx="6" fill="currentColor" opacity="0.5" /><text x="90" y="66" textAnchor="middle" fontSize="14" fill="currentColor">Na</text><text x="240" y="66" textAnchor="middle" fontSize="14" fill="currentColor">Ar</text></>;
     case "reaction-rate":
       return <><rect x="90" y="70" width="40" height="50" rx="6" fill="currentColor" opacity="0.3" /><rect x="145" y="50" width="40" height="70" rx="6" fill="currentColor" opacity="0.5" /><rect x="200" y="30" width="40" height="90" rx="6" fill="currentColor" /></>;
     case "equilibrium":
@@ -82,12 +96,46 @@ function Motif({ id }: { id: SimulationId }) {
       return <><line x1="60" y1="110" x2="260" y2="40" stroke="currentColor" strokeWidth="5" strokeLinecap="round" /><circle cx="160" cy="75" r="6" fill="currentColor" /></>;
     case "quadratic":
       return <path d="M50 110 Q160 20 270 110" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />;
+    case "exponential":
+      return <path d="M50 120 C90 118, 120 110, 150 90 S220 30, 270 20" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />;
+    case "absolute":
+      return <path d="M50 40 L160 120 L270 40" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />;
+    case "reciprocal":
+      return <><path d="M40 40 C80 40, 100 120, 150 120" fill="none" stroke="currentColor" strokeWidth="4" /><path d="M170 40 C220 40, 240 120, 280 120" fill="none" stroke="currentColor" strokeWidth="4" /><line x1="160" y1="30" x2="160" y2="130" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" opacity="0.5" /></>;
     case "trigonometry":
       return <><polygon points="80,120 240,120 240,40" fill="currentColor" opacity="0.18" stroke="currentColor" strokeWidth="4" /><circle cx="100" cy="104" r="10" fill="none" stroke="currentColor" strokeWidth="3" /></>;
     case "probability":
       return <><circle cx="120" cy="76" r="28" fill="none" stroke="currentColor" strokeWidth="4" /><rect x="176" y="48" width="56" height="56" rx="10" fill="currentColor" opacity="0.25" stroke="currentColor" strokeWidth="4" /><circle cx="204" cy="76" r="6" fill="currentColor" /></>;
     case "area":
       return <><path d="M60 110 Q160 30 260 90 L260 120 L60 120 Z" fill="currentColor" opacity="0.22" /><path d="M60 110 Q160 30 260 90" fill="none" stroke="currentColor" strokeWidth="4" /></>;
+    case "sine":
+      return <path d="M40 76 C70 20, 100 132, 130 76 S190 20, 220 76 S280 132, 300 76" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />;
+    case "doppler":
+      return <><circle cx="90" cy="76" r="16" fill="currentColor" opacity="0.35" /><path d="M120 76 H250" stroke="currentColor" strokeWidth="4" /><circle cx="160" cy="76" r="22" fill="none" stroke="currentColor" strokeWidth="3" opacity="0.4" /><circle cx="200" cy="76" r="34" fill="none" stroke="currentColor" strokeWidth="3" opacity="0.25" /></>;
+    case "coulomb":
+      return <><circle cx="110" cy="76" r="22" fill="currentColor" opacity="0.35" /><circle cx="210" cy="76" r="22" fill="currentColor" /><path d="M140 76 H180" stroke="currentColor" strokeWidth="4" /><path d="M70 76 H88 M232 76 H250" stroke="currentColor" strokeWidth="4" strokeLinecap="round" /></>;
+    case "conduction":
+      return <><rect x="70" y="50" width="180" height="52" rx="8" fill="currentColor" opacity="0.2" /><rect x="70" y="50" width="60" height="52" fill="currentColor" opacity="0.55" /><rect x="190" y="50" width="60" height="52" fill="currentColor" opacity="0.25" /></>;
+    case "dna":
+      return <><path d="M90 40 C120 60, 120 90, 90 110" fill="none" stroke="currentColor" strokeWidth="4" /><path d="M230 40 C200 60, 200 90, 230 110" fill="none" stroke="currentColor" strokeWidth="4" /><line x1="105" y1="55" x2="215" y2="55" stroke="currentColor" strokeWidth="3" /><line x1="105" y1="80" x2="215" y2="80" stroke="currentColor" strokeWidth="3" /><line x1="105" y1="105" x2="215" y2="105" stroke="currentColor" strokeWidth="3" /></>;
+    case "foucault":
+      return <><ellipse cx="160" cy="88" rx="70" ry="28" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="5 4" /><line x1="160" y1="30" x2="200" y2="100" stroke="currentColor" strokeWidth="4" /><circle cx="200" cy="100" r="10" fill="currentColor" /></>;
+    case "brownian":
+      return <path d="M60 90 L90 60 L120 95 L150 50 L180 100 L210 70 L250 88" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />;
+    case "oersted":
+      return <><line x1="160" y1="30" x2="160" y2="130" stroke="currentColor" strokeWidth="8" strokeLinecap="round" /><circle cx="160" cy="80" r="28" fill="none" stroke="currentColor" strokeWidth="3" /><circle cx="160" cy="80" r="48" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.45" /><line x1="210" y1="80" x2="210" y2="50" stroke="currentColor" strokeWidth="4" strokeLinecap="round" /></>;
+    case "magnet":
+      return <><rect x="50" y="55" width="90" height="40" rx="8" fill="currentColor" opacity="0.35" /><rect x="50" y="55" width="45" height="40" rx="8" fill="currentColor" /><rect x="180" y="55" width="90" height="40" rx="8" fill="currentColor" opacity="0.35" /><rect x="225" y="55" width="45" height="40" rx="8" fill="currentColor" /><path d="M140 75 C150 50, 170 50, 180 75" fill="none" stroke="currentColor" strokeWidth="3" /></>;
+    case "lorentz":
+      return <><circle cx="160" cy="76" r="40" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="5 4" /><circle cx="200" cy="76" r="8" fill="currentColor" /><text x="70" y="50" fill="currentColor" fontSize="18">×</text><text x="100" y="110" fill="currentColor" fontSize="18">×</text><text x="230" y="50" fill="currentColor" fontSize="18">×</text></>;
+    case "faraday":
+      return <><ellipse cx="120" cy="76" rx="36" ry="22" fill="none" stroke="currentColor" strokeWidth="4" /><rect x="190" y="40" width="70" height="70" rx="10" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="3" /><line x1="225" y1="75" x2="250" y2="55" stroke="currentColor" strokeWidth="4" strokeLinecap="round" /></>;
+    case "bond":
+      return <><circle cx="110" cy="76" r="28" fill="currentColor" opacity="0.35" /><circle cx="210" cy="76" r="28" fill="currentColor" /><ellipse cx="160" cy="76" rx="36" ry="18" fill="currentColor" opacity="0.25" /></>;
+    case "ionic":
+      return <><circle cx="110" cy="76" r="26" fill="currentColor" /><circle cx="210" cy="76" r="26" fill="currentColor" opacity="0.35" /><text x="110" y="82" textAnchor="middle" fill="currentColor" fontSize="18" fontWeight="700">+</text><text x="210" y="82" textAnchor="middle" fill="currentColor" fontSize="18" fontWeight="700">−</text></>;
+    case "lewis":
+      return <><circle cx="160" cy="76" r="22" fill="currentColor" opacity="0.3" /><circle cx="100" cy="76" r="16" fill="currentColor" /><circle cx="220" cy="76" r="16" fill="currentColor" /><line x1="116" y1="76" x2="138" y2="76" stroke="currentColor" strokeWidth="4" /><line x1="182" y1="76" x2="204" y2="76" stroke="currentColor" strokeWidth="4" /><circle cx="160" cy="48" r="3" fill="currentColor" /><circle cx="160" cy="104" r="3" fill="currentColor" /></>;
     default:
       return <circle cx="160" cy="76" r="34" fill="currentColor" opacity="0.25" />;
   }

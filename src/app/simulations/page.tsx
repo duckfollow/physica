@@ -1,7 +1,12 @@
 import { simulations } from "@/content/simulations";
 import { SimulationCatalog } from "@/components/simulation/simulation-catalog";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "คลังสื่อจำลอง" };
+export const metadata = pageMetadata(
+  "คลังสื่อจำลอง",
+  `เลือกจากการจำลอง ${simulations.length} เรื่อง ปรับตัวแปรแล้วดูผลในฟิสิกส์ ชีววิทยา เคมี และคณิตศาสตร์`,
+  "/simulations/",
+);
 
 export default function Simulations() {
   return (

@@ -4,6 +4,8 @@ import { Frame, Slider } from "./lab-primitives";
 import {
   linearValue, linearRoot, quadraticValue, quadraticVertex, quadraticRoots, quadraticDiscriminant,
   rightTriangle, coinProbability, dieProbability, areaUnderQuadratic,
+  exponentialValue, exponentialGrowth, absoluteValue, absoluteVertex,
+  reciprocalValue, reciprocalAsymptotes, sampleGraph,
 } from "@/simulations/math";
 
 const ox = 360, oy = 220, sx = 28, sy = 22;
@@ -80,6 +82,45 @@ export function ProbabilityLab() {
     <text x="455" y="320" textAnchor="middle">ลูกเต๋า</text>
     <text x="40" y="48">P(หัว {Math.min(heads, flips)} จาก {flips}) = {(coin.p * 100).toFixed(1)}%</text>
     <text x="40" y="78">P(ได้ {Math.min(target, faces)}) = {(die.p * 100).toFixed(1)}%</text>
+  </Frame>;
+}
+
+export function ExponentialLab() {
+  const [a, setA] = useState(1), [base, setBase] = useState(1.5);
+  const kind = exponentialGrowth(base);
+  const label = kind === "growth" ? "เติบโต" : kind === "decay" ? "สลาย" : "คงที่";
+  const segments = sampleGraph((x) => exponentialValue(a, base, x), -6, 6, 100, 12);
+  const y1 = exponentialValue(a, base, 1);
+  return <Frame title="กราฟเอกซ์โพเนนเชียล: y = a·bˣ" stats={[["ค่าที่ x = 0", a.toFixed(2)], ["ค่าที่ x = 1", y1.toFixed(2)], ["ลักษณะ", label]]} controls={<><Slider label="ค่า a (จุดตัดแกน y)" min={0.2} max={3} step={0.1} value={a} onChange={setA} /><Slider label="ฐาน b" min={0.3} max={2.5} step={0.05} value={base} onChange={setBase} /><p className="hint">b &gt; 1 เติบโต · 0 &lt; b &lt; 1 สลาย · ที่ x = 0 ได้ y = a เสมอ</p></>} note="ฐาน b &gt; 0 · สเกลแกนคงที่ · ค่า y ที่สูง/ต่ำมากถูกตัดขอบภาพ">
+    <PlotStage />
+    {segments.map((seg, i) => <polyline key={i} points={seg.map((p) => `${ox + p.x * sx},${oy - p.y * sy}`).join(" ")} fill="none" stroke="#345e48" strokeWidth="3.5" strokeLinecap="round" />)}
+    <circle cx={ox} cy={oy - a * sy} r="6" fill="#d87951" />
+    <text x="40" y="48">y = {a.toFixed(1)} · {base.toFixed(2)}ˣ</text>
+  </Frame>;
+}
+
+export function AbsoluteLab() {
+  const [a, setA] = useState(1), [h, setH] = useState(0), [k, setK] = useState(0);
+  const v = absoluteVertex(h, k);
+  const segments = sampleGraph((x) => absoluteValue(a, h, k, x), -10, 10, 100, 12);
+  return <Frame title="กราฟค่าสัมบูรณ์: y = a|x − h| + k" stats={[["จุดยอด", `(${v.x.toFixed(1)}, ${v.y.toFixed(1)})`], ["ความชันแขน", Math.abs(a).toFixed(1)], ["เปิด", a >= 0 ? "ขึ้นรูป V" : "ลงรูป Λ"]]} controls={<><Slider label="a (ความชันแขน)" min={-3} max={3} step={0.1} value={a} onChange={setA} /><Slider label="h (เลื่อนแนวนอน)" min={-5} max={5} step={0.5} value={h} onChange={setH} /><Slider label="k (เลื่อนแนวตั้ง)" min={-5} max={5} step={0.5} value={k} onChange={setK} /><p className="hint">จุดยอดอยู่ที่ (h, k) · |a| ใหญ่ทำให้ V แคบและชัน</p></>} note="กราฟสองเส้นตรงประกบกันที่จุดยอด · สเกลแกนคงที่">
+    <PlotStage />
+    {segments.map((seg, i) => <polyline key={i} points={seg.map((p) => `${ox + p.x * sx},${oy - p.y * sy}`).join(" ")} fill="none" stroke="#345e48" strokeWidth="3.5" strokeLinecap="round" />)}
+    <circle cx={ox + v.x * sx} cy={oy - v.y * sy} r="6" fill="#d87951" />
+    <text x="40" y="48">y = {a.toFixed(1)}|x − {h.toFixed(1)}| + {k.toFixed(1)}</text>
+  </Frame>;
+}
+
+export function ReciprocalLab() {
+  const [a, setA] = useState(2), [h, setH] = useState(0), [k, setK] = useState(0);
+  const asym = reciprocalAsymptotes(h, k);
+  const segments = sampleGraph((x) => reciprocalValue(a, h, k, x), -10, 10, 160, 12);
+  return <Frame title="กราฟส่วนกลับ: y = a/(x − h) + k" stats={[["เส้นกำกับแนวตั้ง", `x = ${asym.vertical.toFixed(1)}`], ["เส้นกำกับแนวนอน", `y = ${asym.horizontal.toFixed(1)}`], ["สาขา", a >= 0 ? "ควอดแรนต์ I–III แบบเลื่อน" : "ควอดแรนต์ II–IV แบบเลื่อน"]]} controls={<><Slider label="a" min={-4} max={4} step={0.2} value={a} onChange={setA} /><Slider label="h (เลื่อนแนวนอน)" min={-4} max={4} step={0.5} value={h} onChange={setH} /><Slider label="k (เลื่อนแนวตั้ง)" min={-4} max={4} step={0.5} value={k} onChange={setK} /><p className="hint">กราฟไม่ข้ามเส้นกำกับ · ใกล้ x = h ค่า y พุ่งสูงหรือต่ำมาก</p></>} note="ไม่นิยามที่ x = h · สเกลแกนคงที่ · ส่วนที่ |y| ใหญ่ถูกตัดขอบภาพ">
+    <PlotStage />
+    <line x1={ox + asym.vertical * sx} y1="40" x2={ox + asym.vertical * sx} y2="360" stroke="#b56845" strokeDasharray="5 5" />
+    <line x1="80" y1={oy - asym.horizontal * sy} x2="640" y2={oy - asym.horizontal * sy} stroke="#b56845" strokeDasharray="5 5" />
+    {segments.map((seg, i) => <polyline key={i} points={seg.map((p) => `${ox + p.x * sx},${oy - p.y * sy}`).join(" ")} fill="none" stroke="#345e48" strokeWidth="3.5" strokeLinecap="round" />)}
+    <text x="40" y="48">y = {a.toFixed(1)}/(x − {h.toFixed(1)}) + {k.toFixed(1)}</text>
   </Frame>;
 }
 

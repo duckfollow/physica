@@ -164,3 +164,22 @@ export function torque(force: number, radius: number, angleDeg: number) {
   const tau = force * radius * Math.sin(theta);
   return { tau, theta, lever: radius * Math.sin(theta) };
 }
+
+const ATM = 101_325;
+
+/** Hydrostatic pressure at depth: gauge P = ρgh, absolute = P_atm + gauge. Force on area A. */
+export function hydrostaticPressure(depth: number, density: number, area = 0.01, g = G, atm = ATM) {
+  const h = Math.max(0, depth);
+  const gauge = density * g * h;
+  const absolute = atm + gauge;
+  const force = gauge * Math.max(0, area);
+  return {
+    gauge,
+    absolute,
+    force,
+    gaugeKPa: gauge / 1000,
+    absoluteKPa: absolute / 1000,
+    gaugeAtm: gauge / atm,
+    absoluteAtm: absolute / atm,
+  };
+}
