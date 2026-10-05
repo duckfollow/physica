@@ -4,7 +4,7 @@
 
 เว็บไซต์: https://duckfollow.github.io/physica
 
-มี 59 การจำลอง ครอบคลุมฟิสิกส์ ชีววิทยา เคมี และคณิตศาสตร์ เช่น พันธะเคมี ลิวอิส แม่เหล็ก และอื่น ๆ รายการเต็มอยู่ที่ docs/content.md
+มี 62 การจำลอง ครอบคลุมฟิสิกส์ ชีววิทยา เคมี และคณิตศาสตร์ เช่น พันธะเคมี ลิวอิส แม่เหล็ก และอื่น ๆ รายการเต็มอยู่ที่ docs/content.md
 
 สรุปรายเรื่อง หมวด และระดับผู้เรียนอยู่ที่ [docs/content.md](docs/content.md)
 
@@ -49,3 +49,7 @@ AI tutor ต้องเรียก backend ภายนอก ห้ามใ�
 ## Dependencies
 
 ผล audit ครั้งก่อนพบ 5 high ในสาย dependency ของ ESLint ส่วน production audit ไม่พบช่องโหว่ ไม่ force downgrade ข้าม major ควรติดตาม upstream patch
+
+Fiber optics: UTF-8/OOK transmission, deterministic receiver noise, per-bit stepping, attenuation, and a ray-model inset. Route: /simulations/fiber/.
+
+Ohm’s law: `/simulations/ohm/` — single resistor, adjustable V and R, I–V graph, 1 A challenge and worked example.

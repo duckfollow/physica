@@ -1,4 +1,5 @@
 import type { SimulationId } from "@/content/simulations";
+import { coverSubjectOf } from "@/content/subjects";
 
 type Subject = "physics" | "biology" | "chemistry" | "math";
 
@@ -9,15 +10,10 @@ const PALETTE: Record<Subject, { a: string; b: string; ink: string; blob: string
   math: { a: "#dde7f0", b: "#c2d2e4", ink: "#355872", blob: "#ffffff55" },
 };
 
-function subjectOf(topic: string): Subject {
-  if (topic === "ชีววิทยา") return "biology";
-  if (topic === "เคมี") return "chemistry";
-  if (topic === "คณิตศาสตร์") return "math";
-  return "physics";
-}
-
 function Motif({ id }: { id: SimulationId }) {
   switch (id) {
+    case "fiber":
+      return <><rect x="30" y="55" width="260" height="40" rx="20" fill="currentColor" opacity="0.15"/><path d="M35 75H285" stroke="currentColor" strokeWidth="5"/>{[85,145,225].map(x=><circle key={x} cx={x} cy="75" r="9" fill="#dc8b49"/>)}</>;
     case "wave":
       return <path d="M24 78 C48 40, 72 116, 96 78 S144 40, 168 78 S216 116, 240 78 S288 40, 312 78" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />;
     case "pendulum":
@@ -48,8 +44,11 @@ function Motif({ id }: { id: SimulationId }) {
       return <><line x1="70" y1="30" x2="160" y2="76" stroke="currentColor" strokeWidth="4" /><line x1="160" y1="76" x2="250" y2="130" stroke="currentColor" strokeWidth="4" /><line x1="40" y1="76" x2="280" y2="76" stroke="currentColor" strokeWidth="2" opacity="0.45" /></>;
     case "lens":
       return <><ellipse cx="160" cy="76" rx="14" ry="52" fill="currentColor" opacity="0.25" stroke="currentColor" strokeWidth="3" /><line x1="70" y1="40" x2="160" y2="76" stroke="currentColor" strokeWidth="3" /><line x1="160" y1="76" x2="250" y2="40" stroke="currentColor" strokeWidth="3" /></>;
+    case "ohm":
     case "circuit":
       return <><rect x="70" y="48" width="180" height="60" rx="8" fill="none" stroke="currentColor" strokeWidth="4" /><circle cx="100" cy="78" r="8" fill="currentColor" /><circle cx="160" cy="78" r="8" fill="currentColor" /><circle cx="220" cy="78" r="8" fill="currentColor" /></>;
+    case "wire":
+      return <><path d="M40 76 H280" stroke="currentColor" strokeWidth="14" strokeLinecap="round" opacity="0.25" /><path d="M40 76 H280" stroke="currentColor" strokeWidth="6" strokeLinecap="round" /><circle cx="90" cy="76" r="5" fill="currentColor" /><circle cx="160" cy="76" r="5" fill="currentColor" /><circle cx="230" cy="76" r="5" fill="currentColor" /></>;
     case "motor":
       return <><circle cx="160" cy="76" r="46" fill="none" stroke="currentColor" strokeWidth="5" /><line x1="160" y1="76" x2="198" y2="48" stroke="currentColor" strokeWidth="6" strokeLinecap="round" /><circle cx="160" cy="76" r="8" fill="currentColor" /></>;
     case "heat":
@@ -142,7 +141,7 @@ function Motif({ id }: { id: SimulationId }) {
 }
 
 export function SimCover({ id, topic }: { id: SimulationId; topic: string }) {
-  const subject = subjectOf(topic);
+  const subject = coverSubjectOf(topic);
   const palette = PALETTE[subject];
   const gradId = `cover-grad-${id}`;
   return (

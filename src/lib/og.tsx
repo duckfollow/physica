@@ -1,3 +1,4 @@
+import { BrandMark } from "@/components/brand-mark";
 import { ImageResponse } from "next/og";
 
 export const ogSize = { width: 1200, height: 630 };
@@ -47,7 +48,7 @@ export async function ogCard({ eyebrow, title, subtitle }: OgCardProps) {
           <div style={{ fontSize: 34, lineHeight: 1.35, maxWidth: 920, opacity: 0.85 }}>{subtitle}</div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-          <div style={{ fontSize: 40, fontWeight: 700 }}>✳ Physica</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 40, fontWeight: 700 }}><BrandMark size={40} color="#1c392c" /><span>Physica</span></div>
           <div style={{ fontSize: 26, opacity: 0.7 }}>เห็นแล้วลองเอง จึงเข้าใจ</div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { AtomArt } from "@/components/atom-art";
 import { simulations } from "@/content/simulations";
 import Link from "next/link";
 import { SimulationCatalog } from "@/components/simulation/simulation-catalog";
@@ -44,15 +45,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-        <div className="orbit-art" aria-hidden="true">
-          <div className="orbit o1" />
-          <div className="orbit o2" />
-          <div className="orbit o3" />
-          <span className="nucleus">✳</span>
-          <span className="electron e1" />
-          <span className="electron e2" />
-          <span className="art-label">CHANGE ONE THING. DISCOVER SOMETHING.</span>
-        </div>
+        <AtomArt />
       </section>
       <section className="home-labs">
         <div className="section-heading">

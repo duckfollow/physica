@@ -3,15 +3,8 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { levels, type LevelId } from "@/content/curriculum";
 import { simulations, simulationHref, type Simulation } from "@/content/simulations";
+import { SUBJECTS, subjectOf, type Subject } from "@/content/subjects";
 import { SimCover } from "./sim-cover";
-
-const SUBJECTS = ["ฟิสิกส์", "ชีววิทยา", "เคมี", "คณิตศาสตร์"] as const;
-type Subject = (typeof SUBJECTS)[number];
-
-function subjectOf(topic: string): Subject {
-  if (topic === "ชีววิทยา" || topic === "เคมี" || topic === "คณิตศาสตร์") return topic;
-  return "ฟิสิกส์";
-}
 
 const STARTER_IDS = new Set(["wave", "osmosis", "acid-base", "linear", "force", "projectile"]);
 
@@ -20,7 +13,12 @@ export function SimulationCatalog({ initialLevel = "all" }: { initialLevel?: Lev
   const [subject, setSubject] = useState<Subject | "all">("all");
   const [topic, setTopic] = useState("all");
   const [query, setQuery] = useState("");
-  const topics = useMemo(() => [...new Set(simulations.map((s) => s.topic))].sort((a, b) => a.localeCompare(b, "th")), []);
+  const topics = useMemo(() => {
+    const pool = subject === "all"
+      ? simulations
+      : simulations.filter((s) => subjectOf(s.topic) === subject);
+    return [...new Set(pool.map((s) => s.topic))].sort((a, b) => a.localeCompare(b, "th"));
+  }, [subject]);
 
   const visible = simulations.filter((s) => {
     const matchLevel = level === "all" || s.levels.includes(level as LevelId);
