@@ -1,20 +1,17 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { BrandMark } from "@/components/brand-mark";
 import { ImageResponse } from "next/og";
 
 export const ogSize = { width: 1200, height: 630 };
 export const ogContentType = "image/png";
 
-let fontPromise: Promise<ArrayBuffer> | null = null;
+let fontPromise: Promise<Buffer> | null = null;
 
-/** Load Noto Sans Thai for Satori (Thai glyphs). Cached per build. */
+/** Load Noto Sans Thai for Satori (Thai glyphs). Cached per build; local file avoids CDN 404s. */
 export function loadOgFont() {
   if (!fontPromise) {
-    fontPromise = fetch(
-      "https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts@main/hinted/ttf/NotoSansThai/NotoSansThai-Bold.ttf",
-    ).then((res) => {
-      if (!res.ok) throw new Error(`OG font download failed: ${res.status}`);
-      return res.arrayBuffer();
-    });
+    fontPromise = readFile(join(process.cwd(), "public/fonts/NotoSansThai-Bold.ttf"));
   }
   return fontPromise;
 }
