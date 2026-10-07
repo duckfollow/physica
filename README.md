@@ -4,7 +4,7 @@
 
 เว็บไซต์: https://duckfollow.github.io/physica
 
-มี 62 การจำลอง ครอบคลุมฟิสิกส์ ชีววิทยา เคมี และคณิตศาสตร์ เช่น พันธะเคมี ลิวอิส แม่เหล็ก และอื่น ๆ รายการเต็มอยู่ที่ docs/content.md
+มี 64 การจำลอง ครอบคลุมฟิสิกส์ ชีววิทยา เคมี และคณิตศาสตร์ เช่น พันธะเคมี ลิวอิส แม่เหล็ก และอื่น ๆ รายการเต็มอยู่ที่ docs/content.md
 
 สรุปรายเรื่อง หมวด และระดับผู้เรียนอยู่ที่ [docs/content.md](docs/content.md)
 
@@ -53,3 +53,7 @@ AI tutor ต้องเรียก backend ภายนอก ห้ามใ�
 Fiber optics: UTF-8/OOK transmission, deterministic receiver noise, per-bit stepping, attenuation, and a ray-model inset. Route: /simulations/fiber/.
 
 Ohm’s law: `/simulations/ohm/` — single resistor, adjustable V and R, I–V graph, 1 A challenge and worked example.
+
+Earth layers: `/simulations/earth/` — depth explorer, continental/oceanic crust, actual-radius and enlarged-crust views.
+
+Water cycle: `/simulations/water-cycle/` — qualitative closed-reservoir model, adjustable sunlight/cooling and four process explanations.

@@ -1,4 +1,4 @@
-export const SUBJECTS = ["ฟิสิกส์", "ชีววิทยา", "เคมี", "คณิตศาสตร์", "คอมพิวเตอร์"] as const;
+export const SUBJECTS = ["ฟิสิกส์", "ชีววิทยา", "เคมี", "คณิตศาสตร์", "คอมพิวเตอร์", "โลกและอวกาศ"] as const;
 export type Subject = (typeof SUBJECTS)[number];
 
 /** Topics that belong to each subject (for filters and cover colors). */
@@ -34,6 +34,7 @@ const COMPUTER = new Set([
 ]);
 
 export function subjectOf(topic: string): Subject {
+  if (topic === "โครงสร้างโลก" || topic === "วัฏจักรน้ำ") return "โลกและอวกาศ";
   if (COMPUTER.has(topic)) return "คอมพิวเตอร์";
   if (BIOLOGY.has(topic)) return "ชีววิทยา";
   if (CHEMISTRY.has(topic)) return "เคมี";

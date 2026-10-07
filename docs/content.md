@@ -8,14 +8,14 @@ Physica เป็นสื่อจำลองภาษาไทย เน้�
 
 | เส้นทาง | เนื้อหา |
 | --- | --- |
-| `/simulations/` | รายการการจำลองทั้งหมด 62 เรื่อง |
+| `/simulations/` | รายการการจำลองทั้งหมด 64 เรื่อง |
 | `/simulations/<id>/` | หน้าทดลองแต่ละเรื่อง |
 | `/learn/` | เลือกการจำลองตามระดับผู้เรียน |
 | `/tutor/` | หน้า placeholder สำหรับ AI tutor ในอนาคต |
 
 ---
 
-## การจำลองที่เปิดใช้แล้ว (62)
+## การจำลองที่เปิดใช้แล้ว (64)
 
 ### คณิตศาสตร์
 
@@ -155,3 +155,7 @@ Physica เป็นสื่อจำลองภาษาไทย เน้�
 Ohm’s law: `/simulations/ohm/` — single resistor, adjustable V and R, I–V graph, 1 A challenge and worked example.
 
 Wire size: `/simulations/wire/` — R = ρL/A with diameter, length, and material; fixed battery and load; shows current, voltage drop, and heat in the wire.
+
+Earth layers: `/simulations/earth/` — depth explorer, continental/oceanic crust, actual-radius and enlarged-crust views.
+
+Water cycle: `/simulations/water-cycle/` — qualitative closed-reservoir model, adjustable sunlight/cooling and four process explanations.

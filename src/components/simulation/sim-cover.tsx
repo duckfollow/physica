@@ -12,6 +12,8 @@ const PALETTE: Record<Subject, { a: string; b: string; ink: string; blob: string
 
 function Motif({ id }: { id: SimulationId }) {
   switch (id) {
+    case "water-cycle": return <><circle cx="70" cy="40" r="20" fill="#e9b557"/><ellipse cx="190" cy="55" rx="55" ry="22" fill="#cbd5dd"/><path d="M35 115Q140 90 280 115V145H35Z" fill="#5c9eb5"/><path d="M100 90L115 60M180 85L170 107M205 85L195 107" stroke="currentColor" strokeWidth="4"/></>;
+    case "earth": return <>{[64,58,34,13].map((r,i)=><circle key={r} cx="160" cy="75" r={r} fill={["#63946c","#d9924c","#cf593b","#f1cb70"][i]}/>)}</>;
     case "fiber":
       return <><rect x="30" y="55" width="260" height="40" rx="20" fill="currentColor" opacity="0.15"/><path d="M35 75H285" stroke="currentColor" strokeWidth="5"/>{[85,145,225].map(x=><circle key={x} cx={x} cy="75" r="9" fill="#dc8b49"/>)}</>;
     case "wave":
